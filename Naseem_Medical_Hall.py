@@ -8,16 +8,6 @@ st.title('Naseem Medical Hall Receipt Generator')
 
 
 
-hide_streamlit_style = """
-            <style>
-            tbody th {display:none}
-            .blank{
-            display: none;
-            }
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
 
 
 
@@ -33,7 +23,11 @@ for i in range(med_count):
     med_sp=med_master['Cost Price'][med_master[med_master['Name']==med_name].index.values[0]]
     self_receipt.loc[len(self_receipt)] = [med_name,med_sp,med_qty,med_qty*med_sp,med_qty*med_sp-med_qty*med_sp*disc_per/100]
 
-st.table(self_receipt)
+self_receipt2=(self_receipt.set_index('Name')
+        .replace('\$\s+','', regex=True)
+        .astype(float)
+        .map('{:,.2f}'.format))
+st.table(self_receipt2)
 
 result0='Amount before discount  ₹{:.2f}'.format(self_receipt.SP_Amount.sum())
 result1='Final Amount with discount of {:.2f}%=  ₹{:.2f}'.format(disc_per,self_receipt.SP_Amount.sum()-self_receipt.SP_Amount.sum()*disc_per/100)
