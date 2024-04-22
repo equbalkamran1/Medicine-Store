@@ -29,9 +29,27 @@ self_receipt2=(self_receipt.set_index('Name')
         .map('{:,.2f}'.format))
 st.table(self_receipt2)
 
-result0='Amount before discount  ₹{:.2f}'.format(self_receipt.SP_Amount.sum())
-result1='Final Amount with discount of {:.2f}%=  ₹{:.2f}'.format(disc_per,self_receipt.SP_Amount.sum()-self_receipt.SP_Amount.sum()*disc_per/100)
-old_price = '<p style="font-family:sans-serif; color:Blue; font-size: 36px;">'+result0+'</p>'
-st.markdown(old_price, unsafe_allow_html=True)
-new_price = '<p style="font-family:sans-serif; color:Green; font-size: 42px;">'+result1+'</p>'
-st.markdown(new_price, unsafe_allow_html=True)
+del col1
+del col2
+
+col1, _,col2 = st.columns([18, 20, 6])
+
+result_predisc='₹{:.2f}'.format(self_receipt.SP_Amount.sum())
+result_postdisc='₹{:.2f}'.format(self_receipt.SP_Amount.sum()-self_receipt.SP_Amount.sum()*disc_per/100)
+
+old_price_text = '<p style="font-family:sans-serif; color:Blue; font-size: 36px;">Amount before discount</p>'
+old_price_val='<p style="font-family:sans-serif; color:Blue; font-size: 36px;">'+result_predisc+'</p>'
+col1.markdown(old_price_text, unsafe_allow_html=True)
+col2.markdown(old_price_val, unsafe_allow_html=True)
+
+disc_text='<p style="font-family:sans-serif; color:Blue; font-size: 36px;">Discount</p>'
+disc_val='-{:.2f}%'.format(disc_per)
+col1.markdown(disc_text, unsafe_allow_html=True)
+col2.markdown('<p style="font-family:sans-serif; color:Blue; font-size: 36px;">'+disc_val+'</p>', unsafe_allow_html=True)
+
+
+
+new_price_text = '<p style="font-family:sans-serif; color:Green; font-size: 42px;">Final Amount after discount</p>'
+new_price_val='<p style="font-family:sans-serif; color:Green; font-size: 42px;">'+result_postdisc+'</p>'
+col1.markdown(new_price_text, unsafe_allow_html=True)
+col2.markdown(new_price_val, unsafe_allow_html=True)
