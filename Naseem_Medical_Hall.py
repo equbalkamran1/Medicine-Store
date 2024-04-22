@@ -22,7 +22,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 med_count=st.number_input('Select Number of Medicines',1,15)
-disc_per=st.slider('Select Discount Percentage',0,100)
+disc_per=st.slider('Select Discount Percentage',0,100,10)
 med_master=pd.read_excel('Medicine Master.xlsx')
 col1, col2 = st.columns(2)
 self_receipt=pd.DataFrame(columns=['Name','Selling Price','Quantiy','SP_Amount','Discounted Amount'])
