@@ -31,7 +31,7 @@ st.table(self_receipt2)
 
 result0='Amount before discount  ₹{:.2f}'.format(self_receipt.SP_Amount.sum())
 result1='Final Amount with discount of {:.2f}%=  ₹{:.2f}'.format(disc_per,self_receipt.SP_Amount.sum()-self_receipt.SP_Amount.sum()*disc_per/100)
-old_price = '<p style="font-family:sans-serif; color:Green; font-size: 42px;">'+result0+'</p>'
+old_price = '<p style="font-family:sans-serif; color:Blue; font-size: 36px;">'+result0+'</p>'
 st.markdown(old_price, unsafe_allow_html=True)
 new_price = '<p style="font-family:sans-serif; color:Green; font-size: 42px;">'+result1+'</p>'
 st.markdown(new_price, unsafe_allow_html=True)
