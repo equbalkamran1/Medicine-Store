@@ -31,7 +31,7 @@ for i in range(med_count):
     med_name=col1.selectbox('Select Medicine',med_master.Name,key = str(i))
     med_qty=col2.number_input('Select Quantity',1,15,key=str(i)+str(i))
     med_sp=med_master['Cost Price'][med_master[med_master['Name']==med_name].index.values[0]]
-    self_receipt.loc[len(self_receipt)] = [med_name,med_sp,med_qty,med_qty*med_sp,,med_qty*med_sp-med_qty*med_sp*disc_per/100]
+    self_receipt.loc[len(self_receipt)] = [med_name,med_sp,med_qty,med_qty*med_sp,med_qty*med_sp-med_qty*med_sp*disc_per/100]
 
 st.table(self_receipt)
 
